@@ -1,0 +1,16 @@
+streamlit
+langchain
+langchain-groq
+chromadb
+faiss-cpu
+sentence-transformers
+langchain-huggingface
+langchain_community
+langchain.core
+#types of documents
+pypdf
+python-docx
+openpyxl
+unstructured
+python-dotenv
+tiktoken
