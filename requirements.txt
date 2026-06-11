@@ -5,8 +5,7 @@ chromadb
 faiss-cpu
 sentence-transformers
 langchain-huggingface
-langchain_community
-langchain.core
+langchain-community
 torchvision
 #types of documents
 pypdf
