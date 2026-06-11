@@ -3,6 +3,7 @@ import os
 import tempfile
 
 from loader import load_document
+from qa_chain import create_qa_chain
 from splitters import split_documents
 from embeddings import get_embeddings
 from faiss_vectorstore import create_FAISS_vectorstore
@@ -34,7 +35,7 @@ if uploaded_file is not None:
     with tempfile.NamedTemporaryFile(
         delete=False,
         suffix=file_extension
-    ) as temp_file:
+        ) as temp_file:
 
         temp_file.write(uploaded_file.read())
         temp_path = temp_file.name
@@ -52,28 +53,36 @@ if uploaded_file is not None:
                 chunks,
                 embeddings
             )
-        else:
+        elif vector_option == "Chroma":
             vectorstore = create_chroma_vectorstore(
                 chunks,
                 embeddings
-         )
+            )
 
-    st.success("Document processed successfully!")
+        qa_chain = create_qa_chain(vectorstore)
+
+        st.success("Document processed successfully!")
 
     query = st.text_input("Ask a question")
 
     if query:
 
-        docs = vectorstore.similarity_search(
-            query,
-            k=3
-        )
+        # docs = vectorstore.similarity_search(
+        #     query,
+        #     k=3
+        # )
 
-        st.subheader("Retrieved Chunks")
+        #st.subheader("Retrieved Chunks")
 
-        for doc in docs:
-            st.write(doc.page_content)
-            st.write("---")
+        #for doc in docs:
+            #st.write(doc.page_content)
+            #st.write("---")
+        response = qa_chain.invoke({"input": query})
+        st.write(response.get("answer"))   
+    os.remove(temp_path) 
+    
 
 
 
+
+  
