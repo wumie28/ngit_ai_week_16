@@ -5,6 +5,7 @@ chromadb
 faiss-cpu
 sentence-transformers
 langchain-huggingface
+langchain-classic
 langchain-community
 torchvision
 #types of documents

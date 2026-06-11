@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain_classic.chains import retrieval_qa,RetrievalQA
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
-from langchain_classic.chains import create_retrievial_chain
+from langchain_classic.chains import create_retrieval_chain
 
 load_dotenv()
 
@@ -37,7 +37,7 @@ def create_qa_chain(vector_db):
         prompt=prompt,
     )
 
-    qa_chain = create_retrievial_chain(
+    qa_chain = create_retrieval_chain(
         retriever=retrieval_qa, 
         combine_documents_chain=documents_chain
    )
